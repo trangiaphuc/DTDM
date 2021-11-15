@@ -2,12 +2,6 @@ import React from 'react';
 import AWS_LOGO from '../images/aws-icon.jpg';
 
 export default class Header extends React.Component {
-    
-    // // eslint-disable-next-line no-useless-constructor
-    // constructor() {
-    //     super();
-    // }
-
     render() {
         return (
             <header>
