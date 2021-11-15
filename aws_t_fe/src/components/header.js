@@ -1,12 +1,6 @@
 import React from 'react';
 
 export default class Header extends React.Component {
-
-    // // eslint-disable-next-line no-useless-constructor
-    // constructor() {
-    //     super();
-    // }
-
     render() {
         return (
             <div>
