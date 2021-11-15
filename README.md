@@ -2,7 +2,7 @@
 Cloud Computing Project using NodeJS and ReactJS with AWS Translate 
 
 
-##Installation: 
+#Installation: 
 - Open aws_t_be/routes/index.js and config your accessKeyId and secretKeyId
 - Open Terminal:
  - cd aws_t_be
@@ -11,13 +11,13 @@ Cloud Computing Project using NodeJS and ReactJS with AWS Translate
  - cd aws_t_fe
  - yarn start/ npm start
 
-##API:
+#API:
 - localhost:9000/translate
 - request:     
   + "SourceLanguageCode": "",/source language code 
   + "TargetLanguageCode": "", // target language code
   + "Text": "",//text you want to translate
-##Test: 
+#Test: 
 - Open your Browser
 - Navigate to localhost:3000/
 - Choose Source Language Code
