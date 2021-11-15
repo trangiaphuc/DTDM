@@ -19,22 +19,29 @@ export default class TranslationComponent extends React.Component {
         document.title = "AWS Translate";
     }
 
+    callTranslate(){
+        if(!(this.state.text === '')){
+            let data ={
+                SourceLanguageCode: this.state.sourceLanguageCode, /* required */
+                TargetLanguageCode: this.state.targetLanguageCode, /* required */
+                Text: this.state.text
+            }
+            
+            console.log(data.SourceLanguageCode+" "+ data.TargetLanguageCode+" "+data.Text);
+
+            axios.post('http://localhost:9000/translate', data)
+            .then(res=>{
+                console.log(res.data.TranslatedText);
+                this.setState({translatedText: res.data.TranslatedText});
+            });
+        }
+    }
+
     handleSelectSourceLanguage(event) {
-        this.setState({sourceLanguageCode: event.target.value}, 
+        this.setState({sourceLanguageCode: event.target.value},
             ()=>{
-                if(!(this.state.text === '')){
-                    let data ={
-                        SourceLanguageCode: this.state.sourceLanguageCode, /* required */
-                        TargetLanguageCode: this.state.targetLanguageCode, /* required */
-                        Text: this.state.text
-                    }
-                    
-                    axios.post('http://localhost:9000/translate', data)
-                    .then(res=>{
-                        console.log(res.data.TranslatedText);
-                        this.setState({translatedText: res.data.TranslatedText});
-                    });
-                }
+                this.setState({text: ''});
+                this.setState({translatedText: ''});
             }
         );
     }
@@ -42,19 +49,7 @@ export default class TranslationComponent extends React.Component {
     handleSelectTargetLanguage(event) {
         this.setState({targetLanguageCode: event.target.value},
             ()=>{
-                if(!(this.state.text === '')){
-                    let data ={
-                        SourceLanguageCode: this.state.sourceLanguageCode, /* required */
-                        TargetLanguageCode: this.state.targetLanguageCode, /* required */
-                        Text: this.state.text
-                    }
-                    
-                    axios.post('http://localhost:9000/translate', data)
-                    .then(res=>{
-                        console.log(res.data.TranslatedText);
-                        this.setState({translatedText: res.data.TranslatedText});
-                    });
-                }
+                this.callTranslate();
             }
         );
     }
@@ -62,61 +57,197 @@ export default class TranslationComponent extends React.Component {
     handleTextChange(event) {
         this.setState({text: event.target.value}, 
             ()=>{
-                let data ={
-                    SourceLanguageCode: this.state.sourceLanguageCode, /* required */
-                    TargetLanguageCode: this.state.targetLanguageCode, /* required */
-                    Text: this.state.text
-                }
-                
-                axios.post('http://localhost:9000/translate', data)
-                .then(res=>{
-                    console.log(res.data.TranslatedText);
-                    this.setState({translatedText: res.data.TranslatedText});
-                });
+                this.callTranslate()
             }
         );
     }    
     render() {
         return (
-        <form>
+        <form className="m-2">
             <div className="d-flex justify-content-between">
                 <div className="form-group w-100 p-3">
-                    <label htmlFor="exampleFormControlSelect1">Select Source Language</label>
+                    <b htmlFor="exampleFormControlSelect1" style= {{ color: "#162B3C" }} >SOURCE LANGUAGE</b>
                     <select 
-                        className="form-select form-select mb-3" 
-                        aria-label=".form-select-lg example"
-                        onChange={this.handleSelectSourceLanguage}>
+                    className="form-select form-select mb-3" 
+                    aria-label=".form-select-lg example"
+                    value={this.state.sourceLanguageCode}
+                    onChange = {this.handleSelectSourceLanguage}>
                         <option defaultValue value="en">English</option>
                         <option value="vi">Vietnamese</option>
-                        <option value="de">Germany</option>
+                        <option value="af">Afrikaans</option>
+                        <option value="sq">Albanian</option>
+                        <option value="am">Amharic</option>
+                        <option value="ar">Arabic</option>
+                        <option value="hy">Armenian</option>
+                        <option value="az">Azerbaijani</option>
+                        <option value="bn">Bengali</option>
+                        <option value="bs">Bosnian</option>
+                        <option value="bg">Bulgarian</option>
+                        <option value="ca">Catalan</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="hr">Croatian</option>
+                        <option value="cs">Czech</option>
+                        <option value="da">Danish</option>
+                        <option value="fa-AF">Dari</option>
+                        <option value="nl">Dutch</option>
+                        <option value="et">Estonian</option>
+                        <option value="fa">Farsi (Persian)</option>
+                        <option value="tl">Filipino, Tagalog</option>
+                        <option value="fi">Finnish</option>
+                        <option value="fr">French</option>
+                        <option value="fr-CA">French (Canada)</option>
+                        <option value="ka">Georgian</option>
+                        <option value="de">German</option>
+                        <option value="el">Greek</option>
+                        <option value="gu">Gujarati</option>
+                        <option value="ht">Haitian Creole</option>
+                        <option value="ha">Hausa</option>
+                        <option value="he">Hebrew</option>
+                        <option value="hi">Hindi</option>
+                        <option value="hu">Hungarian</option>
+                        <option value="is">Icelandic</option>
+                        <option value="id">Indonesian</option>
+                        <option value="ga">Irish</option>
+                        <option value="it">Italian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="kn">Kannada</option>
+                        <option value="kk">Kazakh</option>
+                        <option value="ko">Korean</option>
+                        <option value="lv">Latvian</option>
+                        <option value="lt">Lithuanian</option>
+                        <option value="mk">Macedonian</option>
+                        <option value="ms">Malay</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mt">Maltese</option>
+                        <option value="mr">Marathi</option>
+                        <option value="mn">Mongolian</option>
+                        <option value="no">Norwegian</option>
+                        <option value="ps">Pashto</option>
+                        <option value="pl">Polish</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="pt-PT">Portuguese (Portugal)</option>
+                        <option value="pa">Punjabi</option>
+                        <option value="ro">Romanian</option>
+                        <option value="ru">Russian</option>
+                        <option value="sr">Serbian</option>
+                        <option value="si">Sinhala</option>
+                        <option value="sk">Slovak</option>
+                        <option value="sl">Slovenian</option>
+                        <option value="so">Somali</option>
+                        <option value="es">Spanish</option>
+                        <option value="es-MX">Spanish (Mexico)</option>
+                        <option value="sw">Swahili</option>
+                        <option value="sv">Swedish</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="uk">Ukrainian</option>
+                        <option value="ur">Urdu</option>
+                        <option value="uz">Uzbek</option>
+                        <option value="cy">Welsh</option>
                     </select>
                     
                     <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1"
                         type="text" 
-                        rows="20"
+                        rows="18"
                         value={this.state.text} 
                         placeholder="Enter Your Text Here"
                         onChange={this.handleTextChange} 
                         ></textarea>
                 </div>
                 <div className="form-group w-100 p-3">
-                    <label htmlFor="exampleFormControlSelect1">Select Source Language</label>
+                    <b htmlFor="exampleFormControlSelect1" style= {{ color: "#162B3C" }}>TARGET LANGUAGE</b>
                     <select 
                     className="form-select form-select mb-3" 
                     aria-label=".form-select-lg example"
-                    onChange={this.handleSelectTargetLanguage}>
+                    value = {this.state.targetLanguageCode}
+                    onChange = {this.handleSelectTargetLanguage}>
                         <option defaultValue value="en">English</option>
                         <option value="vi">Vietnamese</option>
-                        <option value="de">Germany</option>
+                        <option value="af">Afrikaans</option>
+                        <option value="sq">Albanian</option>
+                        <option value="am">Amharic</option>
+                        <option value="ar">Arabic</option>
+                        <option value="hy">Armenian</option>
+                        <option value="az">Azerbaijani</option>
+                        <option value="bn">Bengali</option>
+                        <option value="bs">Bosnian</option>
+                        <option value="bg">Bulgarian</option>
+                        <option value="ca">Catalan</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="hr">Croatian</option>
+                        <option value="cs">Czech</option>
+                        <option value="da">Danish</option>
+                        <option value="fa-AF">Dari</option>
+                        <option value="nl">Dutch</option>
+                        <option value="et">Estonian</option>
+                        <option value="fa">Farsi (Persian)</option>
+                        <option value="tl">Filipino, Tagalog</option>
+                        <option value="fi">Finnish</option>
+                        <option value="fr">French</option>
+                        <option value="fr-CA">French (Canada)</option>
+                        <option value="ka">Georgian</option>
+                        <option value="de">German</option>
+                        <option value="el">Greek</option>
+                        <option value="gu">Gujarati</option>
+                        <option value="ht">Haitian Creole</option>
+                        <option value="ha">Hausa</option>
+                        <option value="he">Hebrew</option>
+                        <option value="hi">Hindi</option>
+                        <option value="hu">Hungarian</option>
+                        <option value="is">Icelandic</option>
+                        <option value="id">Indonesian</option>
+                        <option value="ga">Irish</option>
+                        <option value="it">Italian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="kn">Kannada</option>
+                        <option value="kk">Kazakh</option>
+                        <option value="ko">Korean</option>
+                        <option value="lv">Latvian</option>
+                        <option value="lt">Lithuanian</option>
+                        <option value="mk">Macedonian</option>
+                        <option value="ms">Malay</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mt">Maltese</option>
+                        <option value="mr">Marathi</option>
+                        <option value="mn">Mongolian</option>
+                        <option value="no">Norwegian</option>
+                        <option value="ps">Pashto</option>
+                        <option value="pl">Polish</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="pt-PT">Portuguese (Portugal)</option>
+                        <option value="pa">Punjabi</option>
+                        <option value="ro">Romanian</option>
+                        <option value="ru">Russian</option>
+                        <option value="sr">Serbian</option>
+                        <option value="si">Sinhala</option>
+                        <option value="sk">Slovak</option>
+                        <option value="sl">Slovenian</option>
+                        <option value="so">Somali</option>
+                        <option value="es">Spanish</option>
+                        <option value="es-MX">Spanish (Mexico)</option>
+                        <option value="sw">Swahili</option>
+                        <option value="sv">Swedish</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="uk">Ukrainian</option>
+                        <option value="ur">Urdu</option>
+                        <option value="uz">Uzbek</option>
+                        <option value="cy">Welsh</option>
                     </select>
             
                     <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1"
                         type="text" 
-                        rows = "20" 
+                        rows = "18" 
                         value={this.state.translatedText} 
                         placeholder="Translattion"
                         readOnly = {true}
