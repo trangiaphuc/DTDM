@@ -60,95 +60,108 @@ export default class TranslationComponent extends React.Component {
                 this.callTranslate()
             }
         );
-    }    
+    }   
+       
     render() {
+        let languageData = 
+        [
+            {"value":"en" , "text":"English"},
+            {"value":"vi", "text":"Vietnamese"},
+            {"value":"af", "text":"Afrikaans"},
+            {"value":"sq", "text":"Albanian"},
+            {"value":"am", "text":"Amharic"},
+            {"value":"ar", "text":"Arabic"},
+            {"value":"hy", "text":"Armenian"},
+            {"value":"az", "text":"Azerbaijani"},
+            {"value":"bn", "text":"Bengali"},
+            {"value":"bs", "text":"Bosnian"},
+            {"value":"bg", "text":"Bulgarian"},
+            {"value":"ca", "text":"Catalan"},
+            {"value":"zh", "text":"Chinese (Simplified)"},
+            {"value":"zh-TW", "text":"Chinese (Traditional)"},
+            {"value":"hr", "text":"Croatian"},
+            {"value":"cs", "text":"Czech"},
+            {"value":"da", "text":"Danish"},
+            {"value":"fa-AF", "text":"Dari"},
+            {"value":"nl", "text":"Dutch"},
+            {"value":"et", "text":"Estonian"},
+            {"value":"fa", "text":"Farsi (Persian)"},
+            {"value":"tl", "text":"Filipino, Tagalog"},
+            {"value":"fi", "text":"Finnish"},
+            {"value":"fr", "text":"French"},
+            {"value":"fr-CA", "text":"French (Canada)"},
+            {"value":"ka", "text":"Georgian"},
+            {"value":"de", "text":"German"},
+            {"value":"el", "text":"Greek"},
+            {"value":"gu", "text":"Gujarati"},
+            {"value":"ht", "text":"Haitian Creole"},
+            {"value":"ha", "text":"Hausa"},
+            {"value":"he", "text":"Hebrew"},
+            {"value":"hi", "text":"Hindi"},
+            {"value":"hu", "text":"Hungarian"},
+            {"value":"is", "text":"Icelandic"},
+            {"value":"id", "text":"Indonesian"},
+            {"value":"ga", "text":"Irish"},
+            {"value":"it", "text":"Italian"},
+            {"value":"ja", "text":"Japanese"},
+            {"value":"kn", "text":"Kannada"},
+            {"value":"kk", "text":"Kazakh"},
+            {"value":"ko", "text":"Korean"},
+            {"value":"lv", "text":"Latvian"},
+            {"value":"lt", "text":"Lithuanian"},
+            {"value":"mk", "text":"Macedonian"},
+            {"value":"ms", "text":"Malay"},
+            {"value":"ml", "text":"Malayalam"},
+            {"value":"mt", "text":"Maltese"},
+            {"value":"mr", "text":"Marathi"},
+            {"value":"mn", "text":"Mongolian"},
+            {"value":"no", "text":"Norwegian"},
+            {"value":"ps", "text":"Pashto"},
+            {"value":"pl", "text":"Polish"},
+            {"value":"pt", "text":"Portuguese"},
+            {"value":"pt-PT", "text":"Portuguese (Portugal)"},
+            {"value":"pa", "text":"Punjabi"},
+            {"value":"ro", "text":"Romanian"},
+            {"value":"ru", "text":"Russian"},
+            {"value":"sr", "text":"Serbian"},
+            {"value":"si", "text":"Sinhala"},
+            {"value":"sk", "text":"Slovak"},
+            {"value":"sl", "text":"Slovenian"},
+            {"value":"so", "text":"Somali"},
+            {"value":"es", "text":"Spanish"},
+            {"value":"es-MX", "text":"Spanish (Mexico)"},
+            {"value":"sw", "text":"Swahili"},
+            {"value":"sv", "text":"Swedish"},
+            {"value":"ta", "text":"Tamil"},
+            {"value":"te", "text":"Telugu"},
+            {"value":"th", "text":"Thai"},
+            {"value":"tr", "text":"Turkish"},
+            {"value":"uk", "text":"Ukrainian"},
+            {"value":"ur", "text":"Urdu"},
+            {"value":"uz", "text":"Uzbek"},
+            {"value":"cy", "text":"Welsh"},
+        ];
+
+        const renderLanguage = languageData.map((item, i) =>{
+            return(
+                <option key={i} value={item.value}>{item.text}</option>
+            )
+        }, this)
         return (
         <form className="m-2">
             <div className="d-flex justify-content-between">
                 <div className="form-group w-100 p-3">
+                    
                     <b htmlFor="exampleFormControlSelect1" style= {{ color: "#162B3C" }} >SOURCE LANGUAGE</b>
-                    <select 
+                    
+                    <select
                     className="form-select form-select mb-3" 
                     aria-label=".form-select-lg example"
-                    value={this.state.sourceLanguageCode}
+                    value = {this.state.sourceLanguageCode}
                     onChange = {this.handleSelectSourceLanguage}>
-                        <option defaultValue value="en">English</option>
-                        <option value="vi">Vietnamese</option>
-                        <option value="af">Afrikaans</option>
-                        <option value="sq">Albanian</option>
-                        <option value="am">Amharic</option>
-                        <option value="ar">Arabic</option>
-                        <option value="hy">Armenian</option>
-                        <option value="az">Azerbaijani</option>
-                        <option value="bn">Bengali</option>
-                        <option value="bs">Bosnian</option>
-                        <option value="bg">Bulgarian</option>
-                        <option value="ca">Catalan</option>
-                        <option value="zh">Chinese (Simplified)</option>
-                        <option value="zh-TW">Chinese (Traditional)</option>
-                        <option value="hr">Croatian</option>
-                        <option value="cs">Czech</option>
-                        <option value="da">Danish</option>
-                        <option value="fa-AF">Dari</option>
-                        <option value="nl">Dutch</option>
-                        <option value="et">Estonian</option>
-                        <option value="fa">Farsi (Persian)</option>
-                        <option value="tl">Filipino, Tagalog</option>
-                        <option value="fi">Finnish</option>
-                        <option value="fr">French</option>
-                        <option value="fr-CA">French (Canada)</option>
-                        <option value="ka">Georgian</option>
-                        <option value="de">German</option>
-                        <option value="el">Greek</option>
-                        <option value="gu">Gujarati</option>
-                        <option value="ht">Haitian Creole</option>
-                        <option value="ha">Hausa</option>
-                        <option value="he">Hebrew</option>
-                        <option value="hi">Hindi</option>
-                        <option value="hu">Hungarian</option>
-                        <option value="is">Icelandic</option>
-                        <option value="id">Indonesian</option>
-                        <option value="ga">Irish</option>
-                        <option value="it">Italian</option>
-                        <option value="ja">Japanese</option>
-                        <option value="kn">Kannada</option>
-                        <option value="kk">Kazakh</option>
-                        <option value="ko">Korean</option>
-                        <option value="lv">Latvian</option>
-                        <option value="lt">Lithuanian</option>
-                        <option value="mk">Macedonian</option>
-                        <option value="ms">Malay</option>
-                        <option value="ml">Malayalam</option>
-                        <option value="mt">Maltese</option>
-                        <option value="mr">Marathi</option>
-                        <option value="mn">Mongolian</option>
-                        <option value="no">Norwegian</option>
-                        <option value="ps">Pashto</option>
-                        <option value="pl">Polish</option>
-                        <option value="pt">Portuguese</option>
-                        <option value="pt-PT">Portuguese (Portugal)</option>
-                        <option value="pa">Punjabi</option>
-                        <option value="ro">Romanian</option>
-                        <option value="ru">Russian</option>
-                        <option value="sr">Serbian</option>
-                        <option value="si">Sinhala</option>
-                        <option value="sk">Slovak</option>
-                        <option value="sl">Slovenian</option>
-                        <option value="so">Somali</option>
-                        <option value="es">Spanish</option>
-                        <option value="es-MX">Spanish (Mexico)</option>
-                        <option value="sw">Swahili</option>
-                        <option value="sv">Swedish</option>
-                        <option value="ta">Tamil</option>
-                        <option value="te">Telugu</option>
-                        <option value="th">Thai</option>
-                        <option value="tr">Turkish</option>
-                        <option value="uk">Ukrainian</option>
-                        <option value="ur">Urdu</option>
-                        <option value="uz">Uzbek</option>
-                        <option value="cy">Welsh</option>
+                        {renderLanguage}
                     </select>
-                    
+
                     <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1"
@@ -158,91 +171,20 @@ export default class TranslationComponent extends React.Component {
                         placeholder="Enter Your Text Here"
                         onChange={this.handleTextChange} 
                         ></textarea>
+
                 </div>
                 <div className="form-group w-100 p-3">
+                    
                     <b htmlFor="exampleFormControlSelect1" style= {{ color: "#162B3C" }}>TARGET LANGUAGE</b>
+                    
                     <select 
                     className="form-select form-select mb-3" 
                     aria-label=".form-select-lg example"
                     value = {this.state.targetLanguageCode}
                     onChange = {this.handleSelectTargetLanguage}>
-                        <option defaultValue value="en">English</option>
-                        <option value="vi">Vietnamese</option>
-                        <option value="af">Afrikaans</option>
-                        <option value="sq">Albanian</option>
-                        <option value="am">Amharic</option>
-                        <option value="ar">Arabic</option>
-                        <option value="hy">Armenian</option>
-                        <option value="az">Azerbaijani</option>
-                        <option value="bn">Bengali</option>
-                        <option value="bs">Bosnian</option>
-                        <option value="bg">Bulgarian</option>
-                        <option value="ca">Catalan</option>
-                        <option value="zh">Chinese (Simplified)</option>
-                        <option value="zh-TW">Chinese (Traditional)</option>
-                        <option value="hr">Croatian</option>
-                        <option value="cs">Czech</option>
-                        <option value="da">Danish</option>
-                        <option value="fa-AF">Dari</option>
-                        <option value="nl">Dutch</option>
-                        <option value="et">Estonian</option>
-                        <option value="fa">Farsi (Persian)</option>
-                        <option value="tl">Filipino, Tagalog</option>
-                        <option value="fi">Finnish</option>
-                        <option value="fr">French</option>
-                        <option value="fr-CA">French (Canada)</option>
-                        <option value="ka">Georgian</option>
-                        <option value="de">German</option>
-                        <option value="el">Greek</option>
-                        <option value="gu">Gujarati</option>
-                        <option value="ht">Haitian Creole</option>
-                        <option value="ha">Hausa</option>
-                        <option value="he">Hebrew</option>
-                        <option value="hi">Hindi</option>
-                        <option value="hu">Hungarian</option>
-                        <option value="is">Icelandic</option>
-                        <option value="id">Indonesian</option>
-                        <option value="ga">Irish</option>
-                        <option value="it">Italian</option>
-                        <option value="ja">Japanese</option>
-                        <option value="kn">Kannada</option>
-                        <option value="kk">Kazakh</option>
-                        <option value="ko">Korean</option>
-                        <option value="lv">Latvian</option>
-                        <option value="lt">Lithuanian</option>
-                        <option value="mk">Macedonian</option>
-                        <option value="ms">Malay</option>
-                        <option value="ml">Malayalam</option>
-                        <option value="mt">Maltese</option>
-                        <option value="mr">Marathi</option>
-                        <option value="mn">Mongolian</option>
-                        <option value="no">Norwegian</option>
-                        <option value="ps">Pashto</option>
-                        <option value="pl">Polish</option>
-                        <option value="pt">Portuguese</option>
-                        <option value="pt-PT">Portuguese (Portugal)</option>
-                        <option value="pa">Punjabi</option>
-                        <option value="ro">Romanian</option>
-                        <option value="ru">Russian</option>
-                        <option value="sr">Serbian</option>
-                        <option value="si">Sinhala</option>
-                        <option value="sk">Slovak</option>
-                        <option value="sl">Slovenian</option>
-                        <option value="so">Somali</option>
-                        <option value="es">Spanish</option>
-                        <option value="es-MX">Spanish (Mexico)</option>
-                        <option value="sw">Swahili</option>
-                        <option value="sv">Swedish</option>
-                        <option value="ta">Tamil</option>
-                        <option value="te">Telugu</option>
-                        <option value="th">Thai</option>
-                        <option value="tr">Turkish</option>
-                        <option value="uk">Ukrainian</option>
-                        <option value="ur">Urdu</option>
-                        <option value="uz">Uzbek</option>
-                        <option value="cy">Welsh</option>
+                        {renderLanguage}
                     </select>
-            
+                    
                     <textarea 
                         className="form-control" 
                         id="exampleFormControlTextarea1"
@@ -252,6 +194,7 @@ export default class TranslationComponent extends React.Component {
                         placeholder="Translattion"
                         readOnly = {true}
                         ></textarea>
+                        
                 </div>
             </div>
         </form>

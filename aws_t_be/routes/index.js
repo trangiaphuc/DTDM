@@ -18,7 +18,7 @@ router.post('/translate', function(req, res, next) {
   translate.translateText(params, function(err, data) {
     if (err) console.log(err, err.stack); // an error occurred
     else     {
-      console.log(data);
+      // console.log(data);
       res.status(200).send(data);
     } 
   });
