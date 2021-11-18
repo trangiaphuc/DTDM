@@ -35,6 +35,9 @@ export default class TranslationComponent extends React.Component {
                 this.setState({translatedText: res.data.TranslatedText});
             });
         }
+        else{
+            this.setState({translatedText: ''});
+        }
     }
 
     handleSelectSourceLanguage(event) {
