@@ -4,9 +4,9 @@ var AWS = require('aws-sdk');
 
 var translate = new AWS.Translate({
   region: "us-east-1",
-  accessKeyId: "ASIAXKTXZ3MBIHOKZKZE",
-  secretAccessKey: "VjeGEpglGGKzQTibT6bNo6g+6cfOq3Vlq/CEf/Ef",
-  sessionToken: "FwoGZXIvYXdzEAoaDM2/v1uK9T3UAvfIsiLPAciS254Ce/+juyDQbFKSQ0cG8YSVERrlgiO6OTrfg4MFFf3ONCT+btkIzmGVY0Zc9FtycaMP9DeUlU9XkLpE5XsJfY91cqW9RsJFGNT37ATIEw4kOgnoYwfnNZZdo/VQvI+H+jP2GX/DmXcchOAeE+Z8iDSMQR1WOHO2qbyc9lomaY0Vxts24EfiuFeecvYbmGVX05L8rU4NVb+ma45/RZser0vyCF1a4IxAfOhnvRtnFvaWL9nGXPSe4xm351yws/Edm1bIlD8YayP6sdT6DyjpvtaMBjItsS6JeJPFLePsbDJrc7IpBtq9HHk602tbXTfIfjH3sA9FdxnhoButsUxylm+u"});
+  accessKeyId: "ASIAXKTXZ3MBO7ZUSYSP",
+  secretAccessKey: "B6FLdVWQqmwy0QWPy10FIg06rZv2xfXogoUMw1Gq",
+  sessionToken: "FwoGZXIvYXdzEKf//////////wEaDLtxVdBPDz/5kumHTSLPAWOVyAWap3NkR1E5LYr9wLjsvFut1RJjX+CZFuayj+bozGVtKxCicUgPHk/uI77Weg7P/ST3PLyzcwfUVZXy/F7qqZdtZvKejSEiexrMewLkjSnNUi5D3H9ScrGYczzf6iHJqiYDGuW94GbI50www37cd39SLQxhuFxp5Yx+qpuDIr/knOwrWxCX/rwQaY0ShEt1wnd+c6Lei6k1zwkGhTonnizuy6/89yYbwHKNWoQgGPQbJbsmZKKEauzXgQuGqPOh56BE2sKsEFo7r7ZPCCiY9fiMBjItTlEkQHqhE0T0/oIRJvOnWC7OO+tlgHej3qL4M2gvgBeirF+r2E9YDou8+dE1"});
 
 router.get('/', (req, res) => {
   res.status(200).send({message: "Hello, AWS Translate Here!"});
