@@ -28,12 +28,15 @@ export default class TranslationComponent extends React.Component {
             }
             
             console.log(data.SourceLanguageCode+" "+ data.TargetLanguageCode+" "+data.Text);
-
-            axios.post('http://localhost:9000/translate', data)
+            
+            axios.post('http://localhost:9000/translate/', data)
             .then(res=>{
+                console.log(res.data);
                 console.log(res.data.TranslatedText);
-                this.setState({translatedText: res.data.TranslatedText});
-            });
+                const data = res.data;
+                JSON.stringify(data);
+                this.setState({translatedText: data.TranslatedText});
+            })
         }
         else{
             this.setState({translatedText: ''});
