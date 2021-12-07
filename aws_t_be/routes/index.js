@@ -7,12 +7,15 @@ const {JSDOM} = jsdom;
 var validUrl = require('valid-url');
 
 //Tạo constructor AWS translate
-var translate = new AWS.Translate({
-  region: "us-east-1",//region//*require
-  accessKeyId: "ASIAXKTXZ3MBNO6NFS6I",//access key Id//*require
-  secretAccessKey: "8FbWKNCMmc2cF2pWE4Jxd+kUOzZnvORabGmPa/Cm", //secret access key//*require
-  sessionToken: "FwoGZXIvYXdzEKr//////////wEaDKCFeIABx/yhGQDcFCLPAajRe2dnssgJMpSJ04RtO5QrbtXyJ1r9AwKt6NUL2+AtBnOANBfeSu4M0UV2xpNwcxYmBaxijfxph9fmJArxWTZXNYE46o+CCGNYFLUb7/KnEJ7QSFSZKipG/jv/b02TbqhzCO8q2cSemhY7LXiYUpK07YlmAH0dkvncEbr1ouDgidltSfHvItOVNGpex9svQ336H0L/8O3jK+enq9+wv8OZyZRlNzCsp3YwOT3ADL+JlxzH/pZmw7avGLpusvXxU7hO5gglVGQetRJ/caT37iiE6rGNBjItEiVCL9WMa6rZNeue11KusSN3O4jvrEJuptLcJ/Y0CZFBN4Ieoj3Oa3uuRBH4"
+var aws_translate = new AWS.Translate({
+  //region//*require
+  region: "us-east-1",
+  //access key Id//*require
+  accessKeyId: "ASIAXKTXZ3MBNXWRT477",
+  //secret access key//*require
+  secretAccessKey: "WmWjfcc+VOWeGyBFRUTefQEcGAYH9tGZi9waYbM3", 
   //session Token//*require
+  sessionToken: "FwoGZXIvYXdzENv//////////wEaDGC5JVLk6fkvXsNZMCLPAbgTC57k1YrgROAUdmaqeZ5mlbQ57mraYIb6XmPhgRZweOQgZFuBN4ZUMaPL/1LnTMn6u8lHM5x2e+YJLLIVFCua6Mo1r4f5eKVDqzZUTgtqTq1bV7++mn2rpCwRQ+qHggi2IT7ZyJQl+gKm7b7N2jx1KXc2bYYnzKZzsRxNcmrS36WnSSAatvq/lj+jYY3X8uazP844RguMBOBqAx8PieuoOuq3qAzU3LFCXRhn2mOYbFdHQ0K+jZAhLbVHMShMKMdIsHWoGhu7UWfRDUXi/yiA27yNBjItrX+STDVRsxykYq4EStpZAay3qsGHjLHsbmObWKBEd7AIR3XnQWcV0P+ASKZ1"
 });
 
 //Test Route
@@ -22,53 +25,51 @@ router.post('/', (req, res) => {
 
 //Translate Route
 router.post('/translate', function(req, res, next) {
-  //Nhận chuỗi từ request body
-  const input = req.body.Text;
   
-  //Kiểm tra xem chuỗi có phải là một url trang web hay không
-  if(validUrl.isUri(input)){
-    //Nếu là url chuyển đến tran wed đó
-    got(input)
-    .then(response =>{
-      //dung JSDOM để lấy body của web
+  async function urlTranslate(input) {
+    try{
+      const response = await got(input);
       const dom = new JSDOM(response.body);
       var text = dom.window.document.querySelector('body').textContent;
-
-      //Làm đẹp chuỗi
-      text = text.replace(/\r?\n|\r/g, " ");
-      text = text.trim();
-      
-      //Tạo params truyền vào AWS Translate API
-      var params = {
-        SourceLanguageCode: req.body.SourceLanguageCode, //Ngôn ngữ của văn bản web/* required */
-        TargetLanguageCode: req.body.TargetLanguageCode, //Ngôn ngữ muốn chuyển thành/* required */
-        Text: text, //Văn bản lấy được từ body web/* required */
-      }
-      
-      //Gọi AWS Translate API translateText()
-      translate.translateText(params, function(err, data) {
-        if (err) res.status(500).send(err); // Nếu có lỗi xảy ra
-        else{
-          console.log(data)
-          res.status(200).send(data);//Nếu không có lỗi//Thành công
-        } 
-      });
-    })
+      //Gọi hàm translate translate văn bản đã lấy được từ url như văn bản thông thường
+      translate(req, text);
+    }
+    catch(err) {
+      var data = {};
+      data.TranslatedText = "❗You are entering invalid URL! Can not translate!"
+      res.send(data);
+    }
   }
-  else{
-    //Nếu người dùng nhập vào là một văn bản thuần
+
+  function translate(req, text) {
     var params = {
       SourceLanguageCode: req.body.SourceLanguageCode, //Ngôn ngữ của văn bản/* required */
       TargetLanguageCode: req.body.TargetLanguageCode, //Ngôn ngữ muốn chuyển thành/* required */
-      Text: input, //Văn bản/* required */
+      Text: text, //Văn bản/* required */
     }
-    
-    translate.translateText(params, function(err, data) {
+
+    aws_translate.translateText(params, function(err, data) {
       if (err) res.status(500).send(err); // Nếu có lỗi xảy ra
       else     {
         res.status(200).send(data);//Nếu không có lỗi//Thành công
       } 
     });
+  }
+
+
+  //Nhận chuỗi từ request body
+  const input = req.body.Text;
+  
+  //Kiểm tra xem chuỗi có phải là một url trang web hay không
+  if(validUrl.isUri(input)){
+    //Nếu là url chuyển đến translate wed đó
+    //START ZONE GOT URL
+      urlTranslate(input);
+      //END GOT URL ZONE
+  }
+  else{
+    //Nếu người dùng nhập vào là một văn bản thuần
+    translate(req, input);
   }
 });
 
