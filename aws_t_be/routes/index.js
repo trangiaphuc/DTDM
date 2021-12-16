@@ -11,11 +11,11 @@ var aws_translate = new AWS.Translate({
   //region//*require
   region: "us-east-1",
   //access key Id//*require
-  accessKeyId: "ASIAXKTXZ3MBNXWRT477",
+  accessKeyId: "ASIAXKTXZ3MBOPLC55Z2",
   //secret access key//*require
-  secretAccessKey: "WmWjfcc+VOWeGyBFRUTefQEcGAYH9tGZi9waYbM3", 
+  secretAccessKey: "Icu47czNLbDFHIR3neyold1vkGOXF8lkMG1Suokg", 
   //session Token//*require
-  sessionToken: "FwoGZXIvYXdzENv//////////wEaDGC5JVLk6fkvXsNZMCLPAbgTC57k1YrgROAUdmaqeZ5mlbQ57mraYIb6XmPhgRZweOQgZFuBN4ZUMaPL/1LnTMn6u8lHM5x2e+YJLLIVFCua6Mo1r4f5eKVDqzZUTgtqTq1bV7++mn2rpCwRQ+qHggi2IT7ZyJQl+gKm7b7N2jx1KXc2bYYnzKZzsRxNcmrS36WnSSAatvq/lj+jYY3X8uazP844RguMBOBqAx8PieuoOuq3qAzU3LFCXRhn2mOYbFdHQ0K+jZAhLbVHMShMKMdIsHWoGhu7UWfRDUXi/yiA27yNBjItrX+STDVRsxykYq4EStpZAay3qsGHjLHsbmObWKBEd7AIR3XnQWcV0P+ASKZ1"
+  sessionToken: "FwoGZXIvYXdzELD//////////wEaDF7lt/zjOBn5ZiX3BiLPAV9XyMxwC6LB+Nb29OSEREGrAcxwhlzVM6eyYYixesT0lIv1B9P1hV9Kq/OjMgPnUzOTnbKyoiHxMr8cgpiGAbuUAC2smWIATrzLyt2rro70H6pnhVPQC8XLftrWl8DjK3yBHpKQA9kZgIFzoukLxohCEZj+9cJe0MUyeCwgxDuBzPziwIAjtia5hq6aKgeDwS/qVCWYd8H4AucpPEdGqBozUwfgIS9JuKQk/CKGyZabCR3rVlXLOGRPbDCaRTlUt4Icmd3eaR9TEpZCVwNsqijgtuuNBjIt75VYmqa1IgytGzjhqfEgjr4kfOQCRhQt5po9L8jZRgHlZcDKuG6skIHtC8Ab"
 });
 
 //Test Route
@@ -33,6 +33,7 @@ router.post('/translate', function(req, res, next) {
       var text = dom.window.document.querySelector('body').textContent;
       //Gọi hàm translate translate văn bản đã lấy được từ url như văn bản thông thường
       translate(req, text);
+      console.log(text);
     }
     catch(err) {
       var data = {};
